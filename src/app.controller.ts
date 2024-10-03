@@ -8,15 +8,4 @@ export class AppController {
     private readonly appService: AppService,
     private configService: ConfigService
   ) {}
-
-  @Get()
-  @Render("home")
-  handleHomePage() {
-    console.log(">> check port = ", this.configService.get<string>("PORT"))
-  }
-
-  @Get("abc")
-  gethello1(): string {
-    return "hello1";
-  }
 }
