@@ -30,14 +30,20 @@ export class UsersService {
 
   findOne(id: string) {
     if (!mongoose.Types.ObjectId.isValid(id))
-      return `not found users`
+      return `not found users`;
 
     return this.userModel.findOne({_id: id});
   }
 
   async update(updateUserDto: UpdateUserDto) {
-    return await this.userModel.updateOne({_id: updateUserDto._id}, { ...updateUserDto})
+    return await this.userModel.updateOne({_id: updateUserDto._id}, { ...updateUserDto});
   }
 
+  remove(id: string) {
+    if (!mongoose.Types.ObjectId.isValid(id))
+      return `not found users`;
+
+    return this.userModel.deleteOne({_id: id});
+  }
 
 }

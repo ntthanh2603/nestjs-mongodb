@@ -44,6 +44,11 @@ let UsersService = class UsersService {
     async update(updateUserDto) {
         return await this.userModel.updateOne({ _id: updateUserDto._id }, { ...updateUserDto });
     }
+    remove(id) {
+        if (!mongoose_2.default.Types.ObjectId.isValid(id))
+            return `not found users`;
+        return this.userModel.deleteOne({ _id: id });
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
