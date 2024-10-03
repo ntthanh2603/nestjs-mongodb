@@ -18,27 +18,8 @@ let AppController = class AppController {
         this.appService = appService;
         this.configService = configService;
     }
-    handleHomePage() {
-        console.log(">> check port = ", this.configService.get("PORT"));
-    }
-    gethello1() {
-        return "hello1";
-    }
 };
 exports.AppController = AppController;
-__decorate([
-    (0, common_1.Get)(),
-    (0, common_1.Render)("home"),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AppController.prototype, "handleHomePage", null);
-__decorate([
-    (0, common_1.Get)("abc"),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "gethello1", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService,
