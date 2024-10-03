@@ -4,4 +4,5 @@ export declare class AppController {
     private readonly appService;
     private configService;
     constructor(appService: AppService, configService: ConfigService);
+    handleLogin(req: any): any;
 }

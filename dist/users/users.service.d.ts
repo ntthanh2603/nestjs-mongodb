@@ -6,11 +6,13 @@ export declare class UsersService {
     private userModel;
     constructor(userModel: Model<User>);
     getHashPassword: (password: string) => any;
+    isValidPassword(password: string, hash: string): any;
     create(createUserDto: CreateUserDto): Promise<mongoose.Document<unknown, {}, User> & User & {
         _id: mongoose.Types.ObjectId;
     } & {
         __v?: number;
     }>;
+    findAll(): string;
     findOne(id: string): "not found users" | mongoose.Query<mongoose.Document<unknown, {}, User> & User & {
         _id: mongoose.Types.ObjectId;
     } & {
@@ -26,4 +28,13 @@ export declare class UsersService {
     } & {
         __v?: number;
     }, {}, User, "deleteOne", {}>;
+    findOneByUserEmail(userEmail: string): mongoose.Query<mongoose.Document<unknown, {}, User> & User & {
+        _id: mongoose.Types.ObjectId;
+    } & {
+        __v?: number;
+    }, mongoose.Document<unknown, {}, User> & User & {
+        _id: mongoose.Types.ObjectId;
+    } & {
+        __v?: number;
+    }, {}, User, "findOne", {}>;
 }

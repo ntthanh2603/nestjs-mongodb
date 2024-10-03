@@ -27,6 +27,9 @@ let UsersService = class UsersService {
             return hash;
         };
     }
+    isValidPassword(password, hash) {
+        return (0, bcryptjs_1.compareSync)(password, hash);
+    }
     async create(createUserDto) {
         const hashPassword = this.getHashPassword(createUserDto.password);
         let user = await this.userModel.create({
@@ -35,6 +38,9 @@ let UsersService = class UsersService {
             name: createUserDto.name
         });
         return user;
+    }
+    findAll() {
+        return `All user`;
     }
     findOne(id) {
         if (!mongoose_2.default.Types.ObjectId.isValid(id))
@@ -48,6 +54,9 @@ let UsersService = class UsersService {
         if (!mongoose_2.default.Types.ObjectId.isValid(id))
             return `not found users`;
         return this.userModel.deleteOne({ _id: id });
+    }
+    findOneByUserEmail(userEmail) {
+        return this.userModel.findOne({ email: userEmail });
     }
 };
 exports.UsersService = UsersService;
