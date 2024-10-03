@@ -36,6 +36,14 @@ let UsersService = class UsersService {
         });
         return user;
     }
+    findOne(id) {
+        if (!mongoose_2.default.Types.ObjectId.isValid(id))
+            return `not found users`;
+        return this.userModel.findOne({ _id: id });
+    }
+    async update(updateUserDto) {
+        return await this.userModel.updateOne({ _id: updateUserDto._id }, { ...updateUserDto });
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
