@@ -18,6 +18,9 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
       context.getHandler(),
       context.getClass(),
     ]);
+
+    console.log('>> Check isPublic: ', isPublic);
+
     if (isPublic) {
       return true;
     }
@@ -25,6 +28,11 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
   }
 
   handleRequest(err, user, info) {
+
+    console.log(">> Check err: ", err);
+    console.log(">> Check user: ", user)
+    console.log(">> Check info: ", info)
+
     if (err || !user) {
       throw err || new UnauthorizedException("Token invalid");
     }

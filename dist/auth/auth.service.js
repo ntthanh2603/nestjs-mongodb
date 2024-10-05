@@ -30,8 +30,8 @@ let AuthService = class AuthService {
     }
     async login(user) {
         const payload = {
-            email: user.email,
-            _id: user._id,
+            sub: user._id,
+            username: user.email,
         };
         return {
             access_token: this.jwtService.sign(payload),

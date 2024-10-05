@@ -11,5 +11,4 @@ export declare class AppController {
         access_token: string;
     }>;
     getProfile(req: any): any;
-    getProfile1(req: any): any;
 }

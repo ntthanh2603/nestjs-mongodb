@@ -9,6 +9,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
 let AppService = class AppService {
+    home() {
+        return "Home Page!!!!!!!";
+    }
 };
 exports.AppService = AppService;
 exports.AppService = AppService = __decorate([

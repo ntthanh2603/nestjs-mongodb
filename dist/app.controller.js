@@ -26,7 +26,7 @@ let AppController = class AppController {
         this.authService = authService;
     }
     home() {
-        return "Page Home";
+        return this.appService.home();
     }
     handleLogin(req) {
         return this.authService.login(req.user);
@@ -34,13 +34,11 @@ let AppController = class AppController {
     getProfile(req) {
         return req.user;
     }
-    getProfile1(req) {
-        return req.user;
-    }
 };
 exports.AppController = AppController;
 __decorate([
-    (0, common_1.Get)(),
+    (0, customize_1.Public)(),
+    (0, common_1.Get)("/"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
@@ -55,21 +53,12 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "handleLogin", null);
 __decorate([
-    (0, customize_1.Public)(),
-    (0, common_1.Get)("profile"),
+    (0, common_1.Get)("/profile"),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getProfile", null);
-__decorate([
-    (0, customize_1.Public)(),
-    (0, common_1.Get)("profile1"),
-    __param(0, (0, common_1.Request)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AppController.prototype, "getProfile1", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService,

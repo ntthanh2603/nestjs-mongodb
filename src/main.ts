@@ -1,9 +1,7 @@
 import { NestFactory, Reflector } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { join } from "path";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { ConfigService } from "@nestjs/config";
-import { AuthGuard } from "@nestjs/passport";
 import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 import { ValidationPipe } from "@nestjs/common";
 

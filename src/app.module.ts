@@ -10,7 +10,7 @@ import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 
 @Module({
   imports: [
-    // MongooseModule.forRoot('mongodb+srv://tuanthanh2kk4:tuanthanh@cluster0.nzrns.mongodb.net/'),
+    // 'mongodb+srv://tuanthanh2kk4:tuanthanh@cluster0.nzrns.mongodb.net/tuanthanh'),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
