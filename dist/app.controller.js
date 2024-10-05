@@ -17,17 +17,36 @@ const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
 const config_1 = require("@nestjs/config");
 const local_auth_guard_1 = require("./auth/local-auth.guard");
+const auth_service_1 = require("./auth/auth.service");
+const customize_1 = require("./decorator/customize");
 let AppController = class AppController {
-    constructor(appService, configService) {
+    constructor(appService, configService, authService) {
         this.appService = appService;
         this.configService = configService;
+        this.authService = authService;
+    }
+    home() {
+        return 'Page Home';
     }
     handleLogin(req) {
+        return this.authService.login(req.user);
+    }
+    getProfile(req) {
+        return req.user;
+    }
+    getProfile1(req) {
         return req.user;
     }
 };
 exports.AppController = AppController;
 __decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "home", null);
+__decorate([
+    (0, customize_1.Public)(),
     (0, common_1.Post)('/login'),
     (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
     __param(0, (0, common_1.Request)()),
@@ -35,9 +54,26 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "handleLogin", null);
+__decorate([
+    (0, customize_1.Public)(),
+    (0, common_1.Get)('profile'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "getProfile", null);
+__decorate([
+    (0, customize_1.Public)(),
+    (0, common_1.Get)('profile1'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "getProfile1", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService,
-        config_1.ConfigService])
+        config_1.ConfigService,
+        auth_service_1.AuthService])
 ], AppController);
 //# sourceMappingURL=app.controller.js.map
