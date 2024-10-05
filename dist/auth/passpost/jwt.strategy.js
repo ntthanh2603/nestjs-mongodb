@@ -26,13 +26,9 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
         this.usersService = usersService;
     }
     async validate(payload) {
-        const user = await this.usersService.findOneByUserEmail(payload.username);
-        if (!user) {
-            throw new common_1.UnauthorizedException('User not found');
-        }
         return {
-            _id: user._id,
-            email: user.email,
+            _id: payload._id,
+            email: payload.email,
         };
     }
 };

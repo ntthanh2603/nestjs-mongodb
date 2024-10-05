@@ -24,19 +24,17 @@ let JwtAuthGuard = class JwtAuthGuard extends (0, passport_1.AuthGuard)("jwt") {
             context.getHandler(),
             context.getClass(),
         ]);
-        console.log('>> Check isPublic: ', isPublic);
         if (isPublic) {
             return true;
         }
         return super.canActivate(context);
     }
     handleRequest(err, user, info) {
-        console.log(">> Check err: ", err);
-        console.log(">> Check user: ", user);
-        console.log(">> Check info: ", info);
         if (err || !user) {
+            console.log(`>> Login fall token invalid`);
             throw err || new common_1.UnauthorizedException("Token invalid");
         }
+        console.log(`>> Login success with token: \n_id: ${user._id} \nemail: ${user.email}`);
         return user;
     }
 };

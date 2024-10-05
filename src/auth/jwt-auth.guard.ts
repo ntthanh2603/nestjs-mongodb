@@ -19,8 +19,6 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
       context.getClass(),
     ]);
 
-    console.log('>> Check isPublic: ', isPublic);
-
     if (isPublic) {
       return true;
     }
@@ -28,14 +26,15 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
   }
 
   handleRequest(err, user, info) {
-
-    console.log(">> Check err: ", err);
-    console.log(">> Check user: ", user)
-    console.log(">> Check info: ", info)
-
     if (err || !user) {
+
+      console.log(`>> Login fall token invalid`);
+
       throw err || new UnauthorizedException("Token invalid");
     }
+
+    console.log(`>> Login success with token: \n_id: ${user._id} \nemail: ${user.email}`);
+
     return user;
   }
 }

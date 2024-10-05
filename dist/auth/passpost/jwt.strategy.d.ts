@@ -7,8 +7,8 @@ export declare class JwtStrategy extends JwtStrategy_base {
     private usersService;
     constructor(configService: ConfigService, usersService: UsersService);
     validate(payload: any): Promise<{
-        _id: import("mongoose").Types.ObjectId;
-        email: string;
+        _id: any;
+        email: any;
     }>;
 }
 export {};
