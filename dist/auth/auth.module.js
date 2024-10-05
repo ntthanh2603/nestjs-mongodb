@@ -17,7 +17,7 @@ const passport_1 = require("@nestjs/passport");
 const local_strategy_1 = require("./passpost/local.strategy");
 const jwt_1 = require("@nestjs/jwt");
 const config_1 = require("@nestjs/config");
-const jwt_strategy_1 = require("./jwt.strategy");
+const jwt_strategy_1 = require("./passpost/jwt.strategy");
 const ms_1 = __importDefault(require("ms"));
 let AuthModule = class AuthModule {
 };
