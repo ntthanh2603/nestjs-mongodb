@@ -9,6 +9,11 @@ async function bootstrap() {
     const configService = app.get(config_1.ConfigService);
     const reflector = app.get(core_1.Reflector);
     app.useGlobalPipes(new common_1.ValidationPipe());
+    app.enableCors({
+        "origin": "*",
+        "methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
+        "preflightContinue": false,
+    });
     await app.listen(configService.get("PORT"));
 }
 bootstrap();
