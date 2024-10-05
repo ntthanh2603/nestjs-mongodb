@@ -1,5 +1,5 @@
-import { Strategy } from 'passport-jwt';
-import { ConfigService } from '@nestjs/config';
+import { Strategy } from "passport-jwt";
+import { ConfigService } from "@nestjs/config";
 declare const JwtStrategy_base: new (...args: any[]) => Strategy;
 export declare class JwtStrategy extends JwtStrategy_base {
     private configService;
@@ -7,6 +7,7 @@ export declare class JwtStrategy extends JwtStrategy_base {
     validate(payload: any): Promise<{
         _id: any;
         email: any;
+        name: string;
     }>;
 }
 export {};

@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { APP_GUARD } from '@nestjs/core';
-import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { MongooseModule } from "@nestjs/mongoose";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { UsersModule } from "./users/users.module";
+import { AuthModule } from "./auth/auth.module";
+import { APP_GUARD } from "@nestjs/core";
+import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 
 @Module({
   imports: [
@@ -14,19 +14,19 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI'),
+        uri: configService.get<string>("MONGODB_URI"),
       }),
       inject: [ConfigService],
     }),
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
     }),
     UsersModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
-    AppService, 
+    AppService,
     // {
     //   provide: APP_GUARD,
     //   useClass: JwtAuthGuard,
