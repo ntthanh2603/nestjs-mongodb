@@ -14,6 +14,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const config_1 = require("@nestjs/config");
 const users_module_1 = require("./users/users.module");
 const auth_module_1 = require("./auth/auth.module");
+const soft_delete_plugin_mongoose_1 = require("soft-delete-plugin-mongoose");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -24,6 +25,10 @@ exports.AppModule = AppModule = __decorate([
                 imports: [config_1.ConfigModule],
                 useFactory: async (configService) => ({
                     uri: configService.get("MONGODB_URI"),
+                    connectionFactory: (connection) => {
+                        connection.plugin(soft_delete_plugin_mongoose_1.softDeletePlugin);
+                        return connection;
+                    }
                 }),
                 inject: [config_1.ConfigService],
             }),
