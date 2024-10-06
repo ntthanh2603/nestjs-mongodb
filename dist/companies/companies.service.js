@@ -43,8 +43,14 @@ let CompaniesService = class CompaniesService {
             }
         });
     }
-    remove(id) {
-        return `This action removes a #${id} company`;
+    async remove(id, user) {
+        await this.companyModel.updateOne({ _id: id }, {
+            deletedBy: {
+                _id: user._id,
+                email: user.email
+            }
+        });
+        return this.companyModel.softDelete({ _id: id });
     }
 };
 exports.CompaniesService = CompaniesService;

@@ -34,8 +34,8 @@ let CompaniesController = class CompaniesController {
     update(id, updateCompanyDto, user) {
         return this.companiesService.update(id, updateCompanyDto, user);
     }
-    remove(id) {
-        return this.companiesService.remove(+id);
+    remove(id, user) {
+        return this.companiesService.remove(id, user);
     }
 };
 exports.CompaniesController = CompaniesController;
@@ -72,8 +72,9 @@ __decorate([
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, customize_1.User)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", void 0)
 ], CompaniesController.prototype, "remove", null);
 exports.CompaniesController = CompaniesController = __decorate([
