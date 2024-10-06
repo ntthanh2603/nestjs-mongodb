@@ -9,53 +9,53 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserSchema = exports.User = void 0;
+exports.CompanySchema = exports.Company = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
-let User = class User {
+let Company = class Company {
 };
-exports.User = User;
-__decorate([
-    (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
-__decorate([
-    (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
+exports.Company = Company;
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
+], Company.prototype, "name", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], User.prototype, "phone", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", Number)
-], User.prototype, "age", void 0);
+], Company.prototype, "address", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], User.prototype, "address", void 0);
+], Company.prototype, "description", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Object }),
+    __metadata("design:type", Object)
+], Company.prototype, "createdBy", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Object }),
+    __metadata("design:type", Object)
+], Company.prototype, "UpdatedBy", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Object }),
+    __metadata("design:type", Object)
+], Company.prototype, "deletebBy", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Date)
-], User.prototype, "createdAt", void 0);
+], Company.prototype, "createdAt", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Date)
-], User.prototype, "updatedAt", void 0);
+], Company.prototype, "updatedAt", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Boolean)
-], User.prototype, "isDeleted", void 0);
+], Company.prototype, "isDeleted", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Date)
-], User.prototype, "deletedAt", void 0);
-exports.User = User = __decorate([
+], Company.prototype, "deletedAt", void 0);
+exports.Company = Company = __decorate([
     (0, mongoose_1.Schema)({ timestamps: true })
-], User);
-exports.UserSchema = mongoose_1.SchemaFactory.createForClass(User);
-//# sourceMappingURL=user.schema.js.map
+], Company);
+exports.CompanySchema = mongoose_1.SchemaFactory.createForClass(Company);
+//# sourceMappingURL=company.schemas.js.map

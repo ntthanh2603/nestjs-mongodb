@@ -31,10 +31,8 @@ let JwtAuthGuard = class JwtAuthGuard extends (0, passport_1.AuthGuard)("jwt") {
     }
     handleRequest(err, user, info) {
         if (err || !user) {
-            console.log(`>> Login fall token invalid`);
             throw err || new common_1.UnauthorizedException("Token invalid");
         }
-        console.log(`>> Login success with token: \n_id: ${user._id} \nemail: ${user.email}`);
         return user;
     }
 };

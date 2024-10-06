@@ -1,12 +1,12 @@
 import { IsNotEmpty } from "class-validator";
 
 export class CreateCompanyDto {
-  @IsNotEmpty()
+  @IsNotEmpty({message: "Email not null"})
   email: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({message: "Address not null"})
   address: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({message: "Desscription not null"})
   description: string;
 }

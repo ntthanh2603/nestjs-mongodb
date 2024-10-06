@@ -15,6 +15,7 @@ const config_1 = require("@nestjs/config");
 const users_module_1 = require("./users/users.module");
 const auth_module_1 = require("./auth/auth.module");
 const soft_delete_plugin_mongoose_1 = require("soft-delete-plugin-mongoose");
+const companies_module_1 = require("./companies/companies.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -37,6 +38,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             users_module_1.UsersModule,
             auth_module_1.AuthModule,
+            companies_module_1.CompaniesModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [
