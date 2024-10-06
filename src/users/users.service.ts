@@ -32,9 +32,6 @@ export class UsersService {
     return user;
   }
 
-  findAll() {
-    return `All user`;
-  }
 
   findOne(id: string) {
     if (!mongoose.Types.ObjectId.isValid(id)) return `not found users`;

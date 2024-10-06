@@ -42,9 +42,6 @@ let UsersService = class UsersService {
         });
         return user;
     }
-    findAll() {
-        return `All user`;
-    }
     findOne(id) {
         if (!mongoose_2.default.Types.ObjectId.isValid(id))
             return `not found users`;

@@ -17,8 +17,17 @@ export declare class CompaniesService {
     } & Required<{
         _id: import("mongoose").Types.ObjectId;
     }>>;
-    findAll(): string;
-    findOne(id: number): import("mongoose").Query<import("mongoose").UpdateWriteOpResult, import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
+    findAll(): import("mongoose").Query<(import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    }> & import("mongoose").Document<unknown, {}, Company> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>)[], import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
         _id: import("mongoose").Types.ObjectId;
     } & {
         __v?: number;
@@ -32,7 +41,32 @@ export declare class CompaniesService {
         _id: import("mongoose").Types.ObjectId;
     } & {
         __v?: number;
-    }, "updateOne", {}>;
+    }, "find", {}>;
+    findOne(id: string): import("mongoose").Query<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    }> & import("mongoose").Document<unknown, {}, Company> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>, import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    }> & import("mongoose").Document<unknown, {}, Company> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    }, "findOne", {}>;
     update(id: string, updateCompanyDto: UpdateCompanyDto, user: IUser): Promise<import("mongoose").UpdateWriteOpResult>;
     remove(id: string, user: IUser): Promise<{
         deleted: number;

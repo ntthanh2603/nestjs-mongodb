@@ -19,7 +19,6 @@ export declare class UsersService {
     } & Required<{
         _id: mongoose.Types.ObjectId;
     }>>;
-    findAll(): string;
     findOne(id: string): "not found users" | mongoose.Query<mongoose.Document<unknown, {}, mongoose.Document<unknown, {}, User> & User & {
         _id: mongoose.Types.ObjectId;
     } & {

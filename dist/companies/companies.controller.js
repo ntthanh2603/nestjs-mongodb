@@ -29,7 +29,7 @@ let CompaniesController = class CompaniesController {
         return this.companiesService.findAll();
     }
     findOne(id) {
-        return this.companiesService.findOne(+id);
+        return this.companiesService.findOne(id);
     }
     update(id, updateCompanyDto, user) {
         return this.companiesService.update(id, updateCompanyDto, user);

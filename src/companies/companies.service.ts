@@ -21,11 +21,11 @@ export class CompaniesService {
   }
 
   findAll() {
-    return `This action returns all companies`;
+    return this.companyModel.find();
   }
 
-  findOne(id: number) {
-    return this.companyModel.updateOne();
+  findOne(id: string) {
+    return this.companyModel.findOne({ _id: id});
   }
 
   async update(id: string, updateCompanyDto: UpdateCompanyDto, user: IUser) {

@@ -29,10 +29,10 @@ let CompaniesService = class CompaniesService {
         });
     }
     findAll() {
-        return `This action returns all companies`;
+        return this.companyModel.find();
     }
     findOne(id) {
-        return this.companyModel.updateOne();
+        return this.companyModel.findOne({ _id: id });
     }
     async update(id, updateCompanyDto, user) {
         return await this.companyModel.updateOne({ _id: id }, {
