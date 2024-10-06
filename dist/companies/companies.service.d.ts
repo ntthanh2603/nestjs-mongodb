@@ -18,7 +18,21 @@ export declare class CompaniesService {
         _id: import("mongoose").Types.ObjectId;
     }>>;
     findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateCompanyDto: UpdateCompanyDto): string;
+    findOne(id: number): import("mongoose").Query<import("mongoose").UpdateWriteOpResult, import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    }> & import("mongoose").Document<unknown, {}, Company> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    }, "updateOne", {}>;
+    update(id: string, updateCompanyDto: UpdateCompanyDto, user: IUser): Promise<import("mongoose").UpdateWriteOpResult>;
     remove(id: number): string;
 }

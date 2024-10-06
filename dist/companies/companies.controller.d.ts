@@ -17,7 +17,21 @@ export declare class CompaniesController {
         _id: import("mongoose").Types.ObjectId;
     }>>;
     findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updateCompanyDto: UpdateCompanyDto): string;
+    findOne(id: string): import("mongoose").Query<import("mongoose").UpdateWriteOpResult, import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, import("./schemas/company.schemas").Company> & import("./schemas/company.schemas").Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    }> & import("mongoose").Document<unknown, {}, import("./schemas/company.schemas").Company> & import("./schemas/company.schemas").Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>, {}, import("mongoose").Document<unknown, {}, import("./schemas/company.schemas").Company> & import("./schemas/company.schemas").Company & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    }, "updateOne", {}>;
+    update(id: string, updateCompanyDto: UpdateCompanyDto, user: IUser): Promise<import("mongoose").UpdateWriteOpResult>;
     remove(id: string): string;
 }

@@ -31,8 +31,8 @@ let CompaniesController = class CompaniesController {
     findOne(id) {
         return this.companiesService.findOne(+id);
     }
-    update(id, updateCompanyDto) {
-        return this.companiesService.update(+id, updateCompanyDto);
+    update(id, updateCompanyDto, user) {
+        return this.companiesService.update(id, updateCompanyDto, user);
     }
     remove(id) {
         return this.companiesService.remove(+id);
@@ -64,8 +64,9 @@ __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, customize_1.User)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_company_dto_1.UpdateCompanyDto]),
+    __metadata("design:paramtypes", [String, update_company_dto_1.UpdateCompanyDto, Object]),
     __metadata("design:returntype", void 0)
 ], CompaniesController.prototype, "update", null);
 __decorate([

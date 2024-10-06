@@ -32,10 +32,16 @@ let CompaniesService = class CompaniesService {
         return `This action returns all companies`;
     }
     findOne(id) {
-        return `This action returns a #${id} company`;
+        return this.companyModel.updateOne();
     }
-    update(id, updateCompanyDto) {
-        return `This action updates a #${id} company`;
+    async update(id, updateCompanyDto, user) {
+        return await this.companyModel.updateOne({ _id: id }, {
+            ...updateCompanyDto,
+            updatedBy: {
+                _id: user._id,
+                email: user.email
+            }
+        });
     }
     remove(id) {
         return `This action removes a #${id} company`;
