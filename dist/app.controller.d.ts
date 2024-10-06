@@ -7,12 +7,4 @@ export declare class AppController {
     private authService;
     constructor(appService: AppService, configService: ConfigService, authService: AuthService);
     home(): string;
-    handleLogin(req: any): Promise<{
-        access_token: string;
-        _id: string;
-        name: string;
-        email: string;
-        role: string;
-    }>;
-    getProfile(req: any): any;
 }

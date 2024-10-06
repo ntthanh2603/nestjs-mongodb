@@ -25,16 +25,4 @@ export class AppController {
   home() {
     return this.appService.home();
   }
-
-  @Public()
-  @Post("/login")
-  @UseGuards(LocalAuthGuard)
-  handleLogin(@Request() req) {
-    return this.authService.login(req.user);
-  }
-
-  @Get("/profile")
-  getProfile(@Request() req) {
-    return req.user;
-  }
 }
