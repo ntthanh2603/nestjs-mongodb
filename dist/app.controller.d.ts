@@ -9,6 +9,10 @@ export declare class AppController {
     home(): string;
     handleLogin(req: any): Promise<{
         access_token: string;
+        _id: string;
+        name: string;
+        email: string;
+        role: string;
     }>;
     getProfile(req: any): any;
 }

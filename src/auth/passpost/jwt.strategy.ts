@@ -4,6 +4,7 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import ms from "ms";
 import { UsersService } from "src/users/users.service";
+import { IUser } from "src/users/users.interface";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -18,10 +19,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any) {
+  async validate(payload: IUser) {
+    const { _id, name, email, role } = payload;
     return {
-      _id: payload._id,
-      email: payload.email,
+      _id,
+      name,
+      email,
+      role
     };
   }
 }
