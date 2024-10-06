@@ -20,8 +20,13 @@ let CompaniesService = class CompaniesService {
     constructor(companyModel) {
         this.companyModel = companyModel;
     }
-    create(createCompanyDto) {
-        return this.companyModel.create({ ...createCompanyDto });
+    create(createCompanyDto, user) {
+        return this.companyModel.create({ ...createCompanyDto,
+            createdBy: {
+                _id: user._id,
+                email: user.email
+            }
+        });
     }
     findAll() {
         return `This action returns all companies`;

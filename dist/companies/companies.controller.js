@@ -17,12 +17,13 @@ const common_1 = require("@nestjs/common");
 const companies_service_1 = require("./companies.service");
 const create_company_dto_1 = require("./dto/create-company.dto");
 const update_company_dto_1 = require("./dto/update-company.dto");
+const customize_1 = require("../decorator/customize");
 let CompaniesController = class CompaniesController {
     constructor(companiesService) {
         this.companiesService = companiesService;
     }
-    create(createCompanyDto) {
-        return this.companiesService.create(createCompanyDto);
+    create(createCompanyDto, user) {
+        return this.companiesService.create(createCompanyDto, user);
     }
     findAll() {
         return this.companiesService.findAll();
@@ -41,8 +42,9 @@ exports.CompaniesController = CompaniesController;
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, customize_1.User)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_company_dto_1.CreateCompanyDto]),
+    __metadata("design:paramtypes", [create_company_dto_1.CreateCompanyDto, Object]),
     __metadata("design:returntype", void 0)
 ], CompaniesController.prototype, "create", null);
 __decorate([
