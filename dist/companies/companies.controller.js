@@ -46,6 +46,7 @@ __decorate([
 ], CompaniesController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, customize_1.ResponseMessage)("Fetch list company with pagenate"),
     __param(0, (0, common_1.Query)("page")),
     __param(1, (0, common_1.Query)("limit")),
     __param(2, (0, common_1.Query)()),

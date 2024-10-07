@@ -41,7 +41,7 @@ export declare class UsersController {
         __v?: number;
     }, "findOne", {}>;
     update(updateUserDto: UpdateUserDto): Promise<import("mongoose").UpdateWriteOpResult>;
-    remove(id: string): "not found users" | Promise<{
+    remove(id: string): Promise<{
         deleted: number;
-    }>;
+    }> | "not found users";
 }
