@@ -1,23 +1,41 @@
-import { HydratedDocument } from "mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
 export type UserDocument = HydratedDocument<User>;
 export declare class User {
+    name: string;
     email: string;
     password: string;
-    name: string;
-    phone: string;
     age: number;
+    gender: number;
     address: string;
+    Company: {
+        _id: mongoose.Schema.Types.ObjectId;
+        name: string;
+    };
+    role: string;
+    refreshToken: string;
+    createdBy: {
+        _id: mongoose.Schema.Types.ObjectId;
+        email: string;
+    };
+    UpdatedBy: {
+        _id: mongoose.Schema.Types.ObjectId;
+        name: string;
+    };
+    deletebBy: {
+        _id: mongoose.Schema.Types.ObjectId;
+        name: string;
+    };
     createdAt: Date;
     updatedAt: Date;
     isDeleted: boolean;
     deletedAt: Date;
 }
-export declare const UserSchema: import("mongoose").Schema<User, import("mongoose").Model<User, any, any, any, import("mongoose").Document<unknown, any, User> & User & {
-    _id: import("mongoose").Types.ObjectId;
+export declare const UserSchema: mongoose.Schema<User, mongoose.Model<User, any, any, any, mongoose.Document<unknown, any, User> & User & {
+    _id: mongoose.Types.ObjectId;
 } & {
     __v?: number;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, User, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<User>> & import("mongoose").FlatRecord<User> & {
-    _id: import("mongoose").Types.ObjectId;
+}, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, User, mongoose.Document<unknown, {}, mongoose.FlatRecord<User>> & mongoose.FlatRecord<User> & {
+    _id: mongoose.Types.ObjectId;
 } & {
     __v?: number;
 }>;
