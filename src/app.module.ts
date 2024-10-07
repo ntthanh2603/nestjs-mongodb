@@ -35,7 +35,6 @@ import { CompaniesModule } from './companies/companies.module';
     AppController],
   providers: [
     AppService,
-
   ],
 })
 export class AppModule { }

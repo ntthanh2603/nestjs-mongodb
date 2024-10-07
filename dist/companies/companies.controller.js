@@ -25,11 +25,8 @@ let CompaniesController = class CompaniesController {
     create(createCompanyDto, user) {
         return this.companiesService.create(createCompanyDto, user);
     }
-    findAll() {
-        return this.companiesService.findAll();
-    }
-    findOne(id) {
-        return this.companiesService.findOne(id);
+    findAll(currentPage, limit, qs) {
+        return this.companiesService.findAll(+currentPage, +limit, qs);
     }
     update(id, updateCompanyDto, user) {
         return this.companiesService.update(id, updateCompanyDto, user);
@@ -49,17 +46,13 @@ __decorate([
 ], CompaniesController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)("page")),
+    __param(1, (0, common_1.Query)("limit")),
+    __param(2, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String, String, String]),
     __metadata("design:returntype", void 0)
 ], CompaniesController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], CompaniesController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),

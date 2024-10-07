@@ -11,11 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompaniesService = void 0;
 const common_1 = require("@nestjs/common");
 const company_schemas_1 = require("./schemas/company.schemas");
 const mongoose_1 = require("@nestjs/mongoose");
+const api_query_params_1 = __importDefault(require("api-query-params"));
 let CompaniesService = class CompaniesService {
     constructor(companyModel) {
         this.companyModel = companyModel;
@@ -28,11 +32,29 @@ let CompaniesService = class CompaniesService {
             }
         });
     }
-    findAll() {
-        return this.companyModel.find();
-    }
-    findOne(id) {
-        return this.companyModel.findOne({ _id: id });
+    async findAll(currentPage, limit, qs) {
+        const { filter, sort, projection, population } = (0, api_query_params_1.default)(qs);
+        delete filter.page;
+        delete filter.limit;
+        let offset = (+currentPage - 1) * (+limit);
+        let defaultLimit = +limit ? +limit : 10;
+        const totalItems = (await this.companyModel.find(filter)).length;
+        const totalPages = Math.ceil(totalItems / defaultLimit);
+        const result = await this.companyModel.find(filter)
+            .skip(offset)
+            .limit(defaultLimit)
+            .sort(sort)
+            .populate(population)
+            .exec();
+        return {
+            meta: {
+                current: currentPage,
+                pageSize: limit,
+                pages: totalPages,
+                total: totalItems
+            },
+            result
+        };
     }
     async update(id, updateCompanyDto, user) {
         return await this.companyModel.updateOne({ _id: id }, {

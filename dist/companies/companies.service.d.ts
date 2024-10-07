@@ -17,56 +17,25 @@ export declare class CompaniesService {
     } & Required<{
         _id: import("mongoose").Types.ObjectId;
     }>>;
-    findAll(): import("mongoose").Query<(import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    }> & import("mongoose").Document<unknown, {}, Company> & Company & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    } & Required<{
-        _id: import("mongoose").Types.ObjectId;
-    }>)[], import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    }> & import("mongoose").Document<unknown, {}, Company> & Company & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    } & Required<{
-        _id: import("mongoose").Types.ObjectId;
-    }>, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    }, "find", {}>;
-    findOne(id: string): import("mongoose").Query<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    }> & import("mongoose").Document<unknown, {}, Company> & Company & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    } & Required<{
-        _id: import("mongoose").Types.ObjectId;
-    }>, import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    }> & import("mongoose").Document<unknown, {}, Company> & Company & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    } & Required<{
-        _id: import("mongoose").Types.ObjectId;
-    }>, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    }, "findOne", {}>;
+    findAll(currentPage: number, limit: number, qs: string): Promise<{
+        meta: {
+            current: number;
+            pageSize: number;
+            pages: number;
+            total: number;
+        };
+        result: (import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Company> & Company & {
+            _id: import("mongoose").Types.ObjectId;
+        } & {
+            __v?: number;
+        }> & import("mongoose").Document<unknown, {}, Company> & Company & {
+            _id: import("mongoose").Types.ObjectId;
+        } & {
+            __v?: number;
+        } & Required<{
+            _id: import("mongoose").Types.ObjectId;
+        }>)[];
+    }>;
     update(id: string, updateCompanyDto: UpdateCompanyDto, user: IUser): Promise<import("mongoose").UpdateWriteOpResult>;
     remove(id: string, user: IUser): Promise<{
         deleted: number;
