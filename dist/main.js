@@ -18,6 +18,11 @@ async function bootstrap() {
         "methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
         "preflightContinue": false,
     });
+    app.setGlobalPrefix('api');
+    app.enableVersioning({
+        type: common_1.VersioningType.URI,
+        defaultVersion: ['1', '2'],
+    });
     await app.listen(configService.get("PORT"));
 }
 bootstrap();
