@@ -1,4 +1,12 @@
-import { Controller, Get, Body, Patch, Param, Delete } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { Public, ResponseMessage, User } from "src/decorator/customize";
@@ -8,9 +16,21 @@ import { IUser } from "./users.interface";
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  // Get all user
+  @Get("/all")
+  @ResponseMessage("Fetch user with paginate")
+  getAllUser(
+    @Query("page") currentPage: string,
+    @Query("limit") limit: string,
+    @Query() qs: string
+  ) {
+    return this.usersService.getAllUser(+currentPage, +limit, qs);
+  }
+
   // Find user by Id
   @Public()
   @Get(":id")
+  @ResponseMessage("User by Id")
   findOneById(@Param("id") id: string) {
     return this.usersService.findUserById(id);
   }

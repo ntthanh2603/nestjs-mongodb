@@ -12,14 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
-const config_1 = require("@nestjs/config");
-const auth_service_1 = require("./auth/auth.service");
 const customize_1 = require("./decorator/customize");
 let AppController = class AppController {
-    constructor(appService, configService, authService) {
+    constructor(appService) {
         this.appService = appService;
-        this.configService = configService;
-        this.authService = authService;
     }
     home() {
         return this.appService.home();
@@ -35,8 +31,6 @@ __decorate([
 ], AppController.prototype, "home", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [app_service_1.AppService,
-        config_1.ConfigService,
-        auth_service_1.AuthService])
+    __metadata("design:paramtypes", [app_service_1.AppService])
 ], AppController);
 //# sourceMappingURL=app.controller.js.map

@@ -25,22 +25,24 @@ let CompaniesService = class CompaniesService {
         this.companyModel = companyModel;
     }
     create(createCompanyDto, user) {
-        return this.companyModel.create({ ...createCompanyDto,
+        return this.companyModel.create({
+            ...createCompanyDto,
             createdBy: {
                 _id: user._id,
-                email: user.email
-            }
+                email: user.email,
+            },
         });
     }
     async findAll(currentPage, limit, qs) {
-        const { filter, sort, projection, population } = (0, api_query_params_1.default)(qs);
+        const { filter, sort, population } = (0, api_query_params_1.default)(qs);
         delete filter.page;
         delete filter.limit;
-        let offset = (+currentPage - 1) * (+limit);
+        let offset = (+currentPage - 1) * +limit;
         let defaultLimit = +limit ? +limit : 10;
         const totalItems = (await this.companyModel.find(filter)).length;
         const totalPages = Math.ceil(totalItems / defaultLimit);
-        const result = await this.companyModel.find(filter)
+        const result = await this.companyModel
+            .find(filter)
             .skip(offset)
             .limit(defaultLimit)
             .sort(sort)
@@ -51,9 +53,9 @@ let CompaniesService = class CompaniesService {
                 current: currentPage,
                 pageSize: limit,
                 pages: totalPages,
-                total: totalItems
+                total: totalItems,
             },
-            result
+            result,
         };
     }
     async update(id, updateCompanyDto, user) {
@@ -61,16 +63,16 @@ let CompaniesService = class CompaniesService {
             ...updateCompanyDto,
             updatedBy: {
                 _id: user._id,
-                email: user.email
-            }
+                email: user.email,
+            },
         });
     }
     async remove(id, user) {
         await this.companyModel.updateOne({ _id: id }, {
             deletedBy: {
                 _id: user._id,
-                email: user.email
-            }
+                email: user.email,
+            },
         });
         return this.companyModel.softDelete({ _id: id });
     }

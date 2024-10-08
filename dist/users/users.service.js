@@ -21,6 +21,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const user_schema_1 = require("./schemas/user.schema");
 const mongoose_2 = __importDefault(require("mongoose"));
 const bcryptjs_1 = require("bcryptjs");
+const api_query_params_1 = __importDefault(require("api-query-params"));
 let UsersService = class UsersService {
     constructor(userModel) {
         this.userModel = userModel;
@@ -92,6 +93,32 @@ let UsersService = class UsersService {
     }
     findOneByUserEmail(userEmail) {
         return this.userModel.findOne({ email: userEmail });
+    }
+    async getAllUser(currentPage, limit, qs) {
+        const { filter, sort, population } = (0, api_query_params_1.default)(qs);
+        delete filter.page;
+        delete filter.limit;
+        let offset = (+currentPage - 1) * +limit;
+        let defaultLimit = +limit ? +limit : 10;
+        const totalItems = (await this.userModel.find(filter)).length;
+        const totalPages = Math.ceil(totalItems / defaultLimit);
+        const result = await this.userModel
+            .find(filter)
+            .skip(offset)
+            .limit(defaultLimit)
+            .sort(sort)
+            .select("-password")
+            .populate(population)
+            .exec();
+        return {
+            meta: {
+                current: currentPage,
+                pageSize: limit,
+                pages: totalPages,
+                total: totalItems,
+            },
+            result,
+        };
     }
 };
 exports.UsersService = UsersService;

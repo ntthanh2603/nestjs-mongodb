@@ -76,4 +76,21 @@ export declare class UsersService {
     }> & {
         __v?: number;
     }, "findOne", {}>;
+    getAllUser(currentPage: number, limit: number, qs: string): Promise<{
+        meta: {
+            current: number;
+            pageSize: number;
+            pages: number;
+            total: number;
+        };
+        result: (mongoose.Document<unknown, {}, mongoose.Document<unknown, {}, User> & User & Required<{
+            _id: string;
+        }> & {
+            __v?: number;
+        }> & mongoose.Document<unknown, {}, User> & User & Required<{
+            _id: string;
+        }> & {
+            __v?: number;
+        })[];
+    }>;
 }
