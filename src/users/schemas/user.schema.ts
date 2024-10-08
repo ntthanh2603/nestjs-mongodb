@@ -4,8 +4,9 @@ import { Gender } from "src/helper/help.enum";
 
 export type UserDocument = HydratedDocument<User>;
 
-@Schema({timestamps: true })
+@Schema({ timestamps: true })
 export class User {
+  _id: string;
   @Prop()
   name: string;
 
@@ -24,11 +25,11 @@ export class User {
   @Prop()
   address: string;
 
-  @Prop({ type: Object})
+  @Prop({ type: Object })
   Company: {
     _id: mongoose.Schema.Types.ObjectId;
-    name: string;
-  }
+    email: string;
+  };
 
   @Prop()
   role: string;
@@ -36,23 +37,23 @@ export class User {
   @Prop()
   refreshToken: string;
 
-  @Prop({ type: Object})
+  @Prop({ type: Object })
   createdBy: {
     _id: mongoose.Schema.Types.ObjectId;
     email: string;
-  }
+  };
 
-  @Prop({ type: Object})
+  @Prop({ type: Object })
   UpdatedBy: {
     _id: mongoose.Schema.Types.ObjectId;
-    name: string;
-  }
+    email: string;
+  };
 
-  @Prop({ type: Object})
+  @Prop({ type: Object })
   deletebBy: {
     _id: mongoose.Schema.Types.ObjectId;
-    name: string;
-  }
+    email: string;
+  };
 
   @Prop()
   createdAt: Date;

@@ -6,11 +6,13 @@ import { User, UserDocument } from "./schemas/user.schema";
 import mongoose from "mongoose";
 import { genSaltSync, hashSync, compareSync } from "bcryptjs";
 import { SoftDeleteModel } from "soft-delete-plugin-mongoose";
-import { use } from "passport";
+import { IUser } from "./users.interface";
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: SoftDeleteModel<UserDocument>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: SoftDeleteModel<UserDocument>
+  ) {}
 
   getHashPassword = (password: string) => {
     const salt = genSaltSync(10);
@@ -22,23 +24,38 @@ export class UsersService {
     return compareSync(password, hash);
   }
 
-  async create(createUserDto: CreateUserDto) {
-    const hashPassword = this.getHashPassword(createUserDto.password);
+  // async create(cretedUserDto: CreateUserDto, user: IUser) {
+  //   const { name, email, password, age, gender, address, role } = cretedUserDto;
 
-    let user = await this.userModel.create({
-      email: createUserDto.email,
-      password: hashPassword,
-      name: createUserDto.name,
-    });
-    return user;
-  }
+  //   const isExist = await this.userModel.findOne({ email });
+  //   if (isExist) {
+  //     throw new BadRequestException(`Email: ${email} already exists`);
+  //   }
+
+  //   const hashPassword = this.getHashPassword(password);
+  //   let newRegister = await this.userModel.create({
+  //     name,
+  //     email,
+  //     password: hashPassword,
+  //     age,
+  //     gender,
+  //     address,
+  //     role,
+  //     createdBy: {
+  //       _id: user._id,
+  //       email: user.email,
+  //     },
+  //   });
+
+  //   return newRegister;
+  // }
 
   async register(user: RegisterUserDto) {
-    const {name, email, password, age, gender, address } = user;
+    const { name, email, password, age, gender, address } = user;
 
-    const isExist = await this.userModel.findOne({email});
-    if (isExist){
-      throw new BadRequestException( `Email: ${email} already exists`);
+    const isExist = await this.userModel.findOne({ email });
+    if (isExist) {
+      throw new BadRequestException(`Email: ${email} already exists`);
     }
 
     const hashPassword = this.getHashPassword(password);
@@ -49,14 +66,13 @@ export class UsersService {
       age,
       gender,
       address,
-      role: "USER"
-    })
-    
+      role: "USER",
+    });
+
     return newRegister;
   }
 
-
-  findOne(id: string) {
+  findOneById(id: string) {
     if (!mongoose.Types.ObjectId.isValid(id)) return `not found users`;
 
     return this.userModel.findOne({ _id: id });
@@ -65,13 +81,23 @@ export class UsersService {
   async update(updateUserDto: UpdateUserDto) {
     return await this.userModel.updateOne(
       { _id: updateUserDto._id },
-      { ...updateUserDto },
+      { ...updateUserDto }
     );
   }
 
-  remove(id: string) {
+  // Delete user
+  async remove(id: string, user: IUser) {
     if (!mongoose.Types.ObjectId.isValid(id)) return `not found users`;
 
+    await this.userModel.updateOne(
+      { _id: id },
+      {
+        deletedBy: {
+          _id: user._id,
+          email: user.email,
+        },
+      }
+    );
     return this.userModel.softDelete({ _id: id });
   }
 

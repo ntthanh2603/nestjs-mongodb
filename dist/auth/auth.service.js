@@ -20,30 +20,24 @@ let AuthService = class AuthService {
     }
     async validateUser(email, password) {
         const user = await this.usersService.findOneByUserEmail(email);
-        if (user) {
-            const isValid = this.usersService.isValidPassword(password, user.password);
-            if (isValid == true) {
-                return user;
-            }
+        if (!user ||
+            !(await this.usersService.isValidPassword(password, user.password))) {
+            throw new common_1.UnauthorizedException("Invalid credentials");
         }
-        return null;
+        return user;
     }
-    async login(user) {
-        const { _id, name, email, role } = user;
+    async login(dto) {
+        const { email, password } = dto;
+        const user = await this.validateUser(email, password);
+        const { name, role, _id } = user;
         const payload = {
-            sub: "token login",
-            iss: "from server",
             _id,
             name,
             email,
-            role
+            role,
         };
         return {
-            access_token: this.jwtService.sign(payload),
-            _id,
-            name,
-            email,
-            role
+            token: this.jwtService.sign(payload),
         };
     }
     async register(user) {

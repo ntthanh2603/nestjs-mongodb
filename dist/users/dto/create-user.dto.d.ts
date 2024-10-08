@@ -1,10 +1,6 @@
-import mongoose from "mongoose";
 import { Gender } from "src/helper/help.enum";
-declare class Company {
-    _id: mongoose.Schema.Types.ObjectId;
-    name: string;
-}
 export declare class CreateUserDto {
+    _id: string;
     name: string;
     email: string;
     password: string;
@@ -12,9 +8,9 @@ export declare class CreateUserDto {
     gender: Gender;
     address: string;
     role: string;
-    company: Company;
 }
 export declare class RegisterUserDto {
+    _id: string;
     name: string;
     email: string;
     password: string;
@@ -22,4 +18,3 @@ export declare class RegisterUserDto {
     gender: Gender;
     address: string;
 }
-export {};

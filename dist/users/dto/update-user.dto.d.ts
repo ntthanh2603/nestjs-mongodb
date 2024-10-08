@@ -1,6 +1,12 @@
 import { CreateUserDto } from "./create-user.dto";
-declare const UpdateUserDto_base: import("@nestjs/mapped-types").MappedType<Omit<CreateUserDto, "password">>;
+import { Gender } from "src/helper/help.enum";
+declare const UpdateUserDto_base: import("@nestjs/mapped-types").MappedType<Partial<CreateUserDto>>;
 export declare class UpdateUserDto extends UpdateUserDto_base {
-    _id: string;
+    name?: string;
+    email?: string;
+    age?: number;
+    gender?: Gender;
+    address?: string;
+    role?: string;
 }
 export {};

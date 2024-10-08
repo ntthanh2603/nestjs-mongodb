@@ -33,15 +33,6 @@ let UsersService = class UsersService {
     isValidPassword(password, hash) {
         return (0, bcryptjs_1.compareSync)(password, hash);
     }
-    async create(createUserDto) {
-        const hashPassword = this.getHashPassword(createUserDto.password);
-        let user = await this.userModel.create({
-            email: createUserDto.email,
-            password: hashPassword,
-            name: createUserDto.name,
-        });
-        return user;
-    }
     async register(user) {
         const { name, email, password, age, gender, address } = user;
         const isExist = await this.userModel.findOne({ email });
@@ -56,11 +47,11 @@ let UsersService = class UsersService {
             age,
             gender,
             address,
-            role: "USER"
+            role: "USER",
         });
         return newRegister;
     }
-    findOne(id) {
+    findOneById(id) {
         if (!mongoose_2.default.Types.ObjectId.isValid(id))
             return `not found users`;
         return this.userModel.findOne({ _id: id });
@@ -68,9 +59,15 @@ let UsersService = class UsersService {
     async update(updateUserDto) {
         return await this.userModel.updateOne({ _id: updateUserDto._id }, { ...updateUserDto });
     }
-    remove(id) {
+    async remove(id, user) {
         if (!mongoose_2.default.Types.ObjectId.isValid(id))
             return `not found users`;
+        await this.userModel.updateOne({ _id: id }, {
+            deletedBy: {
+                _id: user._id,
+                email: user.email,
+            },
+        });
         return this.userModel.softDelete({ _id: id });
     }
     findOneByUserEmail(userEmail) {
