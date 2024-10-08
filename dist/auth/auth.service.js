@@ -46,6 +46,13 @@ let AuthService = class AuthService {
             role
         };
     }
+    async register(user) {
+        let newUser = await this.usersService.register(user);
+        return {
+            _id: newUser?._id,
+            createdAt: newUser?.createdAt,
+        };
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([

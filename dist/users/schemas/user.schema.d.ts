@@ -1,11 +1,12 @@
 import mongoose, { HydratedDocument } from "mongoose";
+import { Gender } from "src/helper/help.enum";
 export type UserDocument = HydratedDocument<User>;
 export declare class User {
     name: string;
     email: string;
     password: string;
     age: number;
-    gender: number;
+    gender: Gender;
     address: string;
     Company: {
         _id: mongoose.Schema.Types.ObjectId;

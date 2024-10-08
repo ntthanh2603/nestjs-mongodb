@@ -42,6 +42,24 @@ let UsersService = class UsersService {
         });
         return user;
     }
+    async register(user) {
+        const { name, email, password, age, gender, address } = user;
+        const isExist = await this.userModel.findOne({ email });
+        if (isExist) {
+            throw new common_1.BadRequestException(`Email: ${email} already exists`);
+        }
+        const hashPassword = this.getHashPassword(password);
+        let newRegister = await this.userModel.create({
+            name,
+            email,
+            password: hashPassword,
+            age,
+            gender,
+            address,
+            role: "USER"
+        });
+        return newRegister;
+    }
     findOne(id) {
         if (!mongoose_2.default.Types.ObjectId.isValid(id))
             return `not found users`;

@@ -16,6 +16,7 @@ exports.RegisterUserDto = exports.CreateUserDto = void 0;
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 const mongoose_1 = __importDefault(require("mongoose"));
+const help_enum_1 = require("../../helper/help.enum");
 class Company {
 }
 __decorate([
@@ -44,10 +45,11 @@ __decorate([
 ], CreateUserDto.prototype, "password", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'Age not empty' }),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], CreateUserDto.prototype, "age", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'Gender not empty' }),
+    (0, class_validator_1.IsEnum)(help_enum_1.Gender, { message: 'Invalid gender: 0 (Male), 1 (Female), 2 (Other)' }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "gender", void 0);
 __decorate([
@@ -83,10 +85,11 @@ __decorate([
 ], RegisterUserDto.prototype, "password", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'Age not empty' }),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], RegisterUserDto.prototype, "age", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'Gender not empty' }),
+    (0, class_validator_1.IsEnum)(help_enum_1.Gender, { message: 'Invalid gender: 0 (Male), 1 (Female), 2 (Other)' }),
     __metadata("design:type", String)
 ], RegisterUserDto.prototype, "gender", void 0);
 __decorate([

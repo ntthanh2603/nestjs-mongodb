@@ -1,6 +1,7 @@
 import { Type } from "class-transformer";
-import { IsEmail, isNotEmpty, IsNotEmpty, IsNotEmptyObject, IsObject, ValidateNested } from "class-validator";
+import { IsEmail, IsEnum, isNotEmpty, IsNotEmpty, IsNotEmptyObject, IsObject, ValidateNested } from "class-validator";
 import mongoose from "mongoose";
+import { Gender } from "src/helper/help.enum";
 
 
 class Company {
@@ -10,6 +11,7 @@ class Company {
   @IsNotEmpty()
   name: string;
 }
+
 
 export class CreateUserDto {
   @IsNotEmpty({message: 'Name not empty'})
@@ -23,10 +25,11 @@ export class CreateUserDto {
   password: string;
 
   @IsNotEmpty({message: 'Age not empty'})
-  age: string;
+  age: number;
 
   @IsNotEmpty({message: 'Gender not empty'})
-  gender: string;
+  @IsEnum(Gender, {message: 'Invalid gender: 0 (Male), 1 (Female), 2 (Other)'})
+  gender: Gender;
 
   @IsNotEmpty({message: 'Address not empty'})
   address: string;
@@ -41,6 +44,7 @@ export class CreateUserDto {
   company!: Company;
 }
 
+
 export class RegisterUserDto {
 
   @IsNotEmpty({message: 'Name not empty'})
@@ -54,10 +58,11 @@ export class RegisterUserDto {
   password: string;
 
   @IsNotEmpty({message: 'Age not empty'})
-  age: string;
+  age: number;
 
   @IsNotEmpty({message: 'Gender not empty'})
-  gender: string;
+  @IsEnum(Gender, {message: 'Invalid gender: 0 (Male), 1 (Female), 2 (Other)'})
+  gender: Gender;
 
   @IsNotEmpty({message: 'Address not empty'})
   address: string;

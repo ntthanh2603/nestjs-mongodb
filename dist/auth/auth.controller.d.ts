@@ -1,4 +1,5 @@
 import { AuthService } from "./auth.service";
+import { RegisterUserDto } from "src/users/dto/create-user.dto";
 export declare class AuthController {
     private authService;
     constructor(authService: AuthService);
@@ -9,5 +10,8 @@ export declare class AuthController {
         email: string;
         role: string;
     }>;
-    getProfile(req: any): any;
+    handleRegister(registerUserDto: RegisterUserDto): Promise<{
+        _id: import("mongoose").Types.ObjectId;
+        createdAt: Date;
+    }>;
 }

@@ -1,11 +1,12 @@
-import { Injectable } from "@nestjs/common";
-import { CreateUserDto } from "./dto/create-user.dto";
+import { BadRequestException, Injectable } from "@nestjs/common";
+import { CreateUserDto, RegisterUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { User, UserDocument } from "./schemas/user.schema";
 import mongoose from "mongoose";
 import { genSaltSync, hashSync, compareSync } from "bcryptjs";
 import { SoftDeleteModel } from "soft-delete-plugin-mongoose";
+import { use } from "passport";
 
 @Injectable()
 export class UsersService {
@@ -30,6 +31,28 @@ export class UsersService {
       name: createUserDto.name,
     });
     return user;
+  }
+
+  async register(user: RegisterUserDto) {
+    const {name, email, password, age, gender, address } = user;
+
+    const isExist = await this.userModel.findOne({email});
+    if (isExist){
+      throw new BadRequestException( `Email: ${email} already exists`);
+    }
+
+    const hashPassword = this.getHashPassword(password);
+    let newRegister = await this.userModel.create({
+      name,
+      email,
+      password: hashPassword,
+      age,
+      gender,
+      address,
+      role: "USER"
+    })
+    
+    return newRegister;
   }
 
 

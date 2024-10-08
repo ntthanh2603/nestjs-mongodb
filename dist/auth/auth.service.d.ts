@@ -1,4 +1,5 @@
 import { JwtService } from "@nestjs/jwt";
+import { RegisterUserDto } from "src/users/dto/create-user.dto";
 import { IUser } from "src/users/users.interface";
 import { UsersService } from "src/users/users.service";
 export declare class AuthService {
@@ -12,5 +13,9 @@ export declare class AuthService {
         name: string;
         email: string;
         role: string;
+    }>;
+    register(user: RegisterUserDto): Promise<{
+        _id: import("mongoose").Types.ObjectId;
+        createdAt: Date;
     }>;
 }
