@@ -51,24 +51,44 @@ let UsersService = class UsersService {
         });
         return newRegister;
     }
-    findOneById(id) {
+    findUserById(id) {
         if (!mongoose_2.default.Types.ObjectId.isValid(id))
-            return `not found users`;
-        return this.userModel.findOne({ _id: id });
+            throw new common_1.NotFoundException("User not found");
+        return this.userModel.findOne({ _id: id }).select("-password");
     }
-    async update(updateUserDto) {
-        return await this.userModel.updateOne({ _id: updateUserDto._id }, { ...updateUserDto });
+    async update(updateUserDto, user) {
+        let result = await this.userModel.updateOne({ _id: updateUserDto._id }, {
+            ...updateUserDto,
+            updatedBy: {
+                _id: user._id,
+                email: user.email,
+            },
+        });
+        return {
+            result,
+            updatedBy: {
+                _id: user._id,
+                email: user.email,
+            },
+        };
     }
     async remove(id, user) {
         if (!mongoose_2.default.Types.ObjectId.isValid(id))
-            return `not found users`;
+            throw new common_1.NotFoundException("Not found id user");
         await this.userModel.updateOne({ _id: id }, {
             deletedBy: {
                 _id: user._id,
                 email: user.email,
             },
         });
-        return this.userModel.softDelete({ _id: id });
+        let result = await this.userModel.softDelete({ _id: id });
+        return {
+            result,
+            deletedBy: {
+                _id: user._id,
+                email: user.email,
+            },
+        };
     }
     findOneByUserEmail(userEmail) {
         return this.userModel.findOne({ email: userEmail });

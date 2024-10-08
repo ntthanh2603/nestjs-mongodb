@@ -8,25 +8,24 @@ import { IUser } from "./users.interface";
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  // Get user by Id
+  // Find user by Id
   @Public()
   @Get(":id")
   findOneById(@Param("id") id: string) {
-    return this.usersService.findOneById(id);
+    return this.usersService.findUserById(id);
   }
 
   // Update user
   @Patch()
   @ResponseMessage("User updated")
-  update(@Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(updateUserDto);
+  update(@Body() updateUserDto: UpdateUserDto, @User() user: IUser) {
+    return this.usersService.update(updateUserDto, user);
   }
 
   // Delete user with user
   @Delete(":id")
   @ResponseMessage("User deleted")
   remove(@Param("id") id: string, @User() user: IUser) {
-    console.log(user);
     return this.usersService.remove(id, user);
   }
 }

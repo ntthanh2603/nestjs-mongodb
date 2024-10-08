@@ -22,13 +22,12 @@ let UsersController = class UsersController {
         this.usersService = usersService;
     }
     findOneById(id) {
-        return this.usersService.findOneById(id);
+        return this.usersService.findUserById(id);
     }
-    update(updateUserDto) {
-        return this.usersService.update(updateUserDto);
+    update(updateUserDto, user) {
+        return this.usersService.update(updateUserDto, user);
     }
     remove(id, user) {
-        console.log(user);
         return this.usersService.remove(id, user);
     }
 };
@@ -45,8 +44,9 @@ __decorate([
     (0, common_1.Patch)(),
     (0, customize_1.ResponseMessage)("User updated"),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, customize_1.User)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [update_user_dto_1.UpdateUserDto]),
+    __metadata("design:paramtypes", [update_user_dto_1.UpdateUserDto, Object]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "update", null);
 __decorate([

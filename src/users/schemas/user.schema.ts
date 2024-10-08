@@ -44,13 +44,13 @@ export class User {
   };
 
   @Prop({ type: Object })
-  UpdatedBy: {
+  updatedBy: {
     _id: mongoose.Schema.Types.ObjectId;
     email: string;
   };
 
   @Prop({ type: Object })
-  deletebBy: {
+  deletedBy: {
     _id: mongoose.Schema.Types.ObjectId;
     email: string;
   };

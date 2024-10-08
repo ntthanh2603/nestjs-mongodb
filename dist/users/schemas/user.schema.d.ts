@@ -19,11 +19,11 @@ export declare class User {
         _id: mongoose.Schema.Types.ObjectId;
         email: string;
     };
-    UpdatedBy: {
+    updatedBy: {
         _id: mongoose.Schema.Types.ObjectId;
         email: string;
     };
-    deletebBy: {
+    deletedBy: {
         _id: mongoose.Schema.Types.ObjectId;
         email: string;
     };

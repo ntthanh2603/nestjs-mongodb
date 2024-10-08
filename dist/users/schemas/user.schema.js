@@ -58,11 +58,11 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)({ type: Object }),
     __metadata("design:type", Object)
-], User.prototype, "UpdatedBy", void 0);
+], User.prototype, "updatedBy", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ type: Object }),
     __metadata("design:type", Object)
-], User.prototype, "deletebBy", void 0);
+], User.prototype, "deletedBy", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Date)

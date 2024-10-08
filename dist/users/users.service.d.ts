@@ -18,7 +18,7 @@ export declare class UsersService {
     }> & {
         __v?: number;
     }>;
-    findOneById(id: string): "not found users" | mongoose.Query<mongoose.Document<unknown, {}, mongoose.Document<unknown, {}, User> & User & Required<{
+    findUserById(id: string): mongoose.Query<mongoose.Document<unknown, {}, mongoose.Document<unknown, {}, User> & User & Required<{
         _id: string;
     }> & {
         __v?: number;
@@ -39,9 +39,21 @@ export declare class UsersService {
     }> & {
         __v?: number;
     }, "findOne", {}>;
-    update(updateUserDto: UpdateUserDto): Promise<mongoose.UpdateWriteOpResult>;
-    remove(id: string, user: IUser): Promise<"not found users" | {
-        deleted: number;
+    update(updateUserDto: UpdateUserDto, user: IUser): Promise<{
+        result: mongoose.UpdateWriteOpResult;
+        updatedBy: {
+            _id: string;
+            email: string;
+        };
+    }>;
+    remove(id: string, user: IUser): Promise<{
+        result: {
+            deleted: number;
+        };
+        deletedBy: {
+            _id: string;
+            email: string;
+        };
     }>;
     findOneByUserEmail(userEmail: string): mongoose.Query<mongoose.Document<unknown, {}, mongoose.Document<unknown, {}, User> & User & Required<{
         _id: string;
