@@ -140,4 +140,13 @@ export class UsersService {
       result, //kết quả query
     };
   }
+
+  // Update token
+  updateUserToken = (refreshToken: string, _id: string) => {
+    return this.userModel.updateOne({ _id }, { refreshToken });
+  };
+
+  findUserByToken = async (refreshToken: string) => {
+    return await this.userModel.findOne({ refreshToken });
+  };
 }

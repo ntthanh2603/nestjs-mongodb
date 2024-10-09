@@ -22,21 +22,32 @@ let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    handleLogin(dto) {
-        return this.authService.login(dto);
+    handleLogin(dto, response) {
+        return this.authService.login(dto, response);
     }
     handleRegister(registerUserDto) {
         return this.authService.register(registerUserDto);
+    }
+    handleGetAccount(user) {
+        return user;
+    }
+    handleRefreshToken(request, response) {
+        const refreshToken = request.cookies["refresh_token"];
+        return this.authService.processNewToken(refreshToken, response);
+    }
+    hendleLogout(response, user) {
+        return this.authService.logout(response, user);
     }
 };
 exports.AuthController = AuthController;
 __decorate([
     (0, customize_1.Public)(),
-    (0, customize_1.ResponseMessage)("Logged user"),
+    (0, customize_1.ResponseMessage)("User login"),
     (0, common_1.Post)("/login"),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [login_dto_1.LoginDto]),
+    __metadata("design:paramtypes", [login_dto_1.LoginDto, Object]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "handleLogin", null);
 __decorate([
@@ -48,6 +59,33 @@ __decorate([
     __metadata("design:paramtypes", [create_user_dto_1.RegisterUserDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "handleRegister", null);
+__decorate([
+    (0, common_1.Get)("/account"),
+    (0, customize_1.ResponseMessage)("Get user information"),
+    __param(0, (0, customize_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "handleGetAccount", null);
+__decorate([
+    (0, customize_1.Public)(),
+    (0, customize_1.ResponseMessage)("Get user by refresh token"),
+    (0, common_1.Get)("/refresh"),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "handleRefreshToken", null);
+__decorate([
+    (0, common_1.Post)("/logout"),
+    (0, customize_1.ResponseMessage)("Logout user"),
+    __param(0, (0, common_1.Res)({ passthrough: true })),
+    __param(1, (0, customize_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "hendleLogout", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)("/auth"),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

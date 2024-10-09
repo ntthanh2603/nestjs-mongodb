@@ -93,4 +93,26 @@ export declare class UsersService {
             __v?: number;
         })[];
     }>;
+    updateUserToken: (refreshToken: string, _id: string) => mongoose.Query<mongoose.UpdateWriteOpResult, mongoose.Document<unknown, {}, mongoose.Document<unknown, {}, User> & User & Required<{
+        _id: string;
+    }> & {
+        __v?: number;
+    }> & mongoose.Document<unknown, {}, User> & User & Required<{
+        _id: string;
+    }> & {
+        __v?: number;
+    }, {}, mongoose.Document<unknown, {}, User> & User & Required<{
+        _id: string;
+    }> & {
+        __v?: number;
+    }, "updateOne", {}>;
+    findUserByToken: (refreshToken: string) => Promise<mongoose.Document<unknown, {}, mongoose.Document<unknown, {}, User> & User & Required<{
+        _id: string;
+    }> & {
+        __v?: number;
+    }> & mongoose.Document<unknown, {}, User> & User & Required<{
+        _id: string;
+    }> & {
+        __v?: number;
+    }>;
 }

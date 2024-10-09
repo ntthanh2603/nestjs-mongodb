@@ -30,6 +30,12 @@ let UsersService = class UsersService {
             const hash = (0, bcryptjs_1.hashSync)(password, salt);
             return hash;
         };
+        this.updateUserToken = (refreshToken, _id) => {
+            return this.userModel.updateOne({ _id }, { refreshToken });
+        };
+        this.findUserByToken = async (refreshToken) => {
+            return await this.userModel.findOne({ refreshToken });
+        };
     }
     isValidPassword(password, hash) {
         return (0, bcryptjs_1.compareSync)(password, hash);
