@@ -23,7 +23,6 @@ async function bootstrap() {
   // Interceptor
   app.useGlobalInterceptors(new TransformInterceptor(reflector));
 
-  // config cookies
   app.use(cookieParser());
 
   // Config CORS
