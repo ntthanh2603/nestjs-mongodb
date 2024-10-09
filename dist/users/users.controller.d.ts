@@ -4,7 +4,7 @@ import { IUser } from "./users.interface";
 export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
-    getAllUser(currentPage: string, limit: string, qs: string): Promise<{
+    getAllUser(current: string, pageSize: string, qs: string): Promise<{
         meta: {
             current: number;
             pageSize: number;

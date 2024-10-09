@@ -76,7 +76,7 @@ export declare class UsersService {
     }> & {
         __v?: number;
     }, "findOne", {}>;
-    getAllUser(currentPage: number, limit: number, qs: string): Promise<{
+    getAllUser(current: number, pageSize: number, qs: string): Promise<{
         meta: {
             current: number;
             pageSize: number;

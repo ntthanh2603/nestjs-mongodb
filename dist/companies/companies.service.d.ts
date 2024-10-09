@@ -17,7 +17,7 @@ export declare class CompaniesService {
     } & Required<{
         _id: import("mongoose").Types.ObjectId;
     }>>;
-    findAll(currentPage: number, limit: number, qs: string): Promise<{
+    findAll(current: number, pageSize: number, qs: string): Promise<{
         meta: {
             current: number;
             pageSize: number;

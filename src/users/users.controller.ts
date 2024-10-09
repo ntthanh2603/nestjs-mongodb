@@ -20,11 +20,11 @@ export class UsersController {
   @Get("/all")
   @ResponseMessage("Fetch user with paginate")
   getAllUser(
-    @Query("page") currentPage: string,
-    @Query("limit") limit: string,
+    @Query("current") current: string,
+    @Query("pageSize") pageSize: string,
     @Query() qs: string
   ) {
-    return this.usersService.getAllUser(+currentPage, +limit, qs);
+    return this.usersService.getAllUser(+current, +pageSize, qs);
   }
 
   // Find user by Id

@@ -21,8 +21,8 @@ let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
-    getAllUser(currentPage, limit, qs) {
-        return this.usersService.getAllUser(+currentPage, +limit, qs);
+    getAllUser(current, pageSize, qs) {
+        return this.usersService.getAllUser(+current, +pageSize, qs);
     }
     findOneById(id) {
         return this.usersService.findUserById(id);
@@ -38,8 +38,8 @@ exports.UsersController = UsersController;
 __decorate([
     (0, common_1.Get)("/all"),
     (0, customize_1.ResponseMessage)("Fetch user with paginate"),
-    __param(0, (0, common_1.Query)("page")),
-    __param(1, (0, common_1.Query)("limit")),
+    __param(0, (0, common_1.Query)("current")),
+    __param(1, (0, common_1.Query)("pageSize")),
     __param(2, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, String]),

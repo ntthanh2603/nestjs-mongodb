@@ -100,12 +100,12 @@ let UsersService = class UsersService {
     findOneByUserEmail(userEmail) {
         return this.userModel.findOne({ email: userEmail });
     }
-    async getAllUser(currentPage, limit, qs) {
+    async getAllUser(current, pageSize, qs) {
         const { filter, sort, population } = (0, api_query_params_1.default)(qs);
-        delete filter.page;
-        delete filter.limit;
-        let offset = (+currentPage - 1) * +limit;
-        let defaultLimit = +limit ? +limit : 10;
+        delete filter.current;
+        delete filter.pageSize;
+        let offset = (+current - 1) * +pageSize;
+        let defaultLimit = +pageSize ? +pageSize : 10;
         const totalItems = (await this.userModel.find(filter)).length;
         const totalPages = Math.ceil(totalItems / defaultLimit);
         const result = await this.userModel
@@ -118,8 +118,8 @@ let UsersService = class UsersService {
             .exec();
         return {
             meta: {
-                current: currentPage,
-                pageSize: limit,
+                current: current,
+                pageSize: pageSize,
                 pages: totalPages,
                 total: totalItems,
             },

@@ -25,8 +25,8 @@ let CompaniesController = class CompaniesController {
     create(createCompanyDto, user) {
         return this.companiesService.create(createCompanyDto, user);
     }
-    findAll(currentPage, limit, qs) {
-        return this.companiesService.findAll(+currentPage, +limit, qs);
+    findAll(current, pageSize, qs) {
+        return this.companiesService.findAll(+current, +pageSize, qs);
     }
     update(id, updateCompanyDto, user) {
         return this.companiesService.update(id, updateCompanyDto, user);
@@ -47,16 +47,16 @@ __decorate([
 __decorate([
     (0, common_1.Get)(),
     (0, customize_1.ResponseMessage)("Fetch list company with pagenate"),
-    __param(0, (0, common_1.Query)("page")),
-    __param(1, (0, common_1.Query)("limit")),
+    __param(0, (0, common_1.Query)("current")),
+    __param(1, (0, common_1.Query)("pageSize")),
     __param(2, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, String]),
     __metadata("design:returntype", void 0)
 ], CompaniesController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Patch)(":id"),
+    __param(0, (0, common_1.Param)("id")),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, customize_1.User)()),
     __metadata("design:type", Function),
@@ -64,15 +64,15 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CompaniesController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Delete)(":id"),
+    __param(0, (0, common_1.Param)("id")),
     __param(1, (0, customize_1.User)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", void 0)
 ], CompaniesController.prototype, "remove", null);
 exports.CompaniesController = CompaniesController = __decorate([
-    (0, common_1.Controller)('companies'),
+    (0, common_1.Controller)("companies"),
     __metadata("design:paramtypes", [companies_service_1.CompaniesService])
 ], CompaniesController);
 //# sourceMappingURL=companies.controller.js.map
