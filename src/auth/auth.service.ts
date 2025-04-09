@@ -6,12 +6,12 @@ import {
   UnauthorizedException,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { RegisterUserDto } from "src/users/dto/create-user.dto";
 import { LoginDto } from "src/users/dto/login.dto";
 import { User } from "src/users/schemas/user.schema";
 import { UsersService } from "src/users/users.service";
 import { Response } from "express";
 import { IUser } from "src/users/users.interface";
+import { RegisterUserDto } from "src/users/dto/register-user.dto";
 
 @Injectable()
 export class AuthService {
@@ -45,13 +45,13 @@ export class AuthService {
       role,
     };
 
-    // Tạo token
+    // Generate new token
     const refresh_token = this.createRefreshToken(payload);
 
-    // Đẩy token lên database
+    // Update token in database
     await this.usersService.updateUserToken(refresh_token, _id);
 
-    // Trả cookies về cho client
+    // return token
     response.cookie("refresh_token", refresh_token, {
       httpOnly: true,
       maxAge: ms(this.configService.get<string>("JWT_REFRESH_EXPIRE")),
@@ -70,7 +70,7 @@ export class AuthService {
 
   // Register user
   async register(user: RegisterUserDto) {
-    let newUser = await this.usersService.register(user);
+    const newUser = await this.usersService.register(user);
 
     return {
       _id: newUser?._id,
@@ -106,16 +106,16 @@ export class AuthService {
           role,
         };
 
-        // Tạo token
+        // Generate new token
         const refresh_token = this.createRefreshToken(payload);
 
-        // Đẩy token lên database
+        // Update token in database
         await this.usersService.updateUserToken(refresh_token, _id);
 
-        // Xóa token cũ
+        // delete old token
         response.clearCookie("refresh_token");
 
-        // Trả cookies về cho client
+        // Set new token
         response.cookie("refresh_token", refresh_token, {
           httpOnly: true,
           maxAge: ms(this.configService.get<string>("JWT_REFRESH_EXPIRE")),

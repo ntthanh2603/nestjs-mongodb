@@ -2,11 +2,10 @@ import { Module } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { UsersModule } from "src/users/users.module";
 import { PassportModule } from "@nestjs/passport";
-import { LocalStrategy } from "./passpost/local.strategy";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { JwtStrategy } from "./passpost/jwt.strategy";
 import ms from "ms";
+import { JwtStrategy } from "./jwt.strategy";
 
 @Module({
   imports: [
@@ -23,7 +22,7 @@ import ms from "ms";
       inject: [ConfigService],
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, JwtStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}

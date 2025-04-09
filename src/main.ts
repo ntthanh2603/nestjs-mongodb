@@ -3,9 +3,10 @@ import { AppModule } from "./app.module";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { ConfigService } from "@nestjs/config";
 import { JwtAuthGuard } from "./auth/jwt-auth.guard";
-import { ValidationPipe, VersioningType } from "@nestjs/common";
+import { Logger, ValidationPipe, VersioningType } from "@nestjs/common";
 import { TransformInterceptor } from "./core/transform.interceptor";
 import cookieParser from "cookie-parser";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -39,6 +40,37 @@ async function bootstrap() {
   //   defaultVersion: ['1', '2'],
   // });
 
-  await app.listen(configService.get<string>("PORT"));
+  // Config swagger
+  const config = new DocumentBuilder()
+    .setTitle("Project social spaces")
+    .setDescription("All Module API")
+    .addBearerAuth(
+      {
+        type: "http",
+        scheme: "Bearer",
+        bearerFormat: "JWT",
+        in: "header",
+      },
+      "token"
+    )
+    .addSecurityRequirements("token")
+    .setVersion("1.0")
+    .build();
+
+  // Để mở documentation thì dùng lệnh sau npx @compodoc/compodoc -p tsconfig.json -s
+  // Rồi vào cổng http://localhost:8080/ để mở documentation
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup("swagger", app, documentFactory, {
+    swaggerOptions: {
+      persistAuthorization: true,
+    },
+  });
+
+  const logger = new Logger("Social-Network-SNET");
+  await app.listen(configService.get<string>("PORT"), () => {
+    logger.log(
+      `Server running on port http://localhost:${configService.get<string>("PORT")}`
+    );
+  });
 }
 bootstrap();

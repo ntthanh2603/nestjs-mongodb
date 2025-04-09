@@ -3,7 +3,6 @@ import {
   Injectable,
   NotFoundException,
 } from "@nestjs/common";
-import { CreateUserDto, RegisterUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { User, UserDocument } from "./schemas/user.schema";
@@ -12,11 +11,13 @@ import { genSaltSync, hashSync, compareSync } from "bcryptjs";
 import { SoftDeleteModel } from "soft-delete-plugin-mongoose";
 import { IUser } from "./users.interface";
 import aqp from "api-query-params";
+import { RegisterUserDto } from "./dto/register-user.dto";
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectModel(User.name) private userModel: SoftDeleteModel<UserDocument>
+    @InjectModel(User.name)
+    private readonly userModel: SoftDeleteModel<UserDocument>
   ) {}
 
   getHashPassword = (password: string) => {
@@ -61,7 +62,7 @@ export class UsersService {
 
   async update(updateUserDto: UpdateUserDto, user: IUser) {
     let result = await this.userModel.updateOne(
-      { _id: updateUserDto._id },
+      { _id: user._id },
       {
         ...updateUserDto,
         updatedBy: {
@@ -132,12 +133,12 @@ export class UsersService {
 
     return {
       meta: {
-        current: current, //trang hiện tại
-        pageSize: pageSize, //số lượng bản ghi đã lấy
-        pages: totalPages, //tổng số trang với điều kiện query
-        total: totalItems, // tổng số phần tử (số bản ghi)
+        current: current,
+        pageSize: pageSize,
+        pages: totalPages,
+        total: totalItems,
       },
-      result, //kết quả query
+      result,
     };
   }
 
